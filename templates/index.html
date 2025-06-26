@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>IMDB</title>
+{% endblock %}
+
+{% block body %}
+<h1>IMDB Movie Search</h1>
+    <form action='/' method='POST'>
+        <input type="text" name="content" placeholder="Search for a movie, genre or country" class="search-input">
+        <input type='submit' value='Search'>
+    </form>
+    <!-- <form action='/' method='POST'>
+        <input type="text" name="content" placeholder="Search for a country" class="search-input">
+        <input type='submit' value='Search'>
+    </form> -->
+    {% if movies %}
+        <h2>Results:</h2>
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Genre</th>
+                    <th>Year</th>
+                    <th>Rating</th> 
+                    <th>Country</th>
+                    <th>Director</th>
+                    <th>Actor</th>
+                </tr>
+                    {% for movie in movies%}
+                    <tr>
+                        <td>{{ movie.title }}</td>
+                        <td>{{ movie.genre }}</td>
+                        <td>{{ movie.year }}</td>
+                        <td>{{ movie.rating }}</td>
+                        <td>{{ movie.country }}</td>
+                        <td>{{ movie.director }}</td>
+                        <td>{{ movie.actor }}</td>
+                    </tr>
+                    {% endfor %}
+                
+            </table>
+    {% endif %}
+{% endblock %}
