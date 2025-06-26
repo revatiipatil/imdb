@@ -14,7 +14,7 @@ def index():
         search_ = request.form.get('content', ' ').strip()
 
         query = """
-        SELECT Movie.title, Genre.name AS genre, Movie.year, Movie.rating, Country.name AS country, Person.name AS director
+        SELECT Movie.title, Genre.name AS genre, Movie.year, Movie.rating, Country.name AS country, Person.name AS director, p.name AS actor
         FROM Movie
         JOIN M_Genre ON Movie.MID = M_Genre.MID
         JOIN Genre ON M_Genre.GID = Genre.GID  
@@ -22,17 +22,18 @@ def index():
         JOIN Country ON M_Country.CID = Country.CID 
         JOIN M_Director ON Movie.MID = M_Director.MID
         JOIN Person ON M_Director.PID = Person.PID     
-        
+        JOIN m_cast mc  ON trim(mc.mid) = Movie.mid
+        JOIN person p   ON p.pid = trim(mc.pid)
         WHERE Movie.title LIKE ?
         OR Genre.name LIKE ?
         OR Country.name LIKE ?
         OR Person.name LIKE ?
-    
+        OR p.name LIKE ?
         GROUP BY Movie.MID
         ORDER BY Movie.rating DESC;
         """
-        filters = [f"%{search_}%", f"%{search_}%", f"%{search_}%", f"%{search_}%"]
-        df = pd.read_sql_query(query, engine, params=(filters[0], filters[1], filters[2], filters[3]))
+        filters = [f"%{search_}%", f"%{search_}%", f"%{search_}%", f"%{search_}%", f"%{search_}%"]
+        df = pd.read_sql_query(query, engine, params=(filters[0], filters[1], filters[2], filters[3], filters[4]))
         movies = df.to_dict(orient='records')
         print(movies)
     
