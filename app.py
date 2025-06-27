@@ -7,8 +7,12 @@ app = Flask(__name__)
 # Connect to the SQLite database
 engine = create_engine('sqlite:///imdb_data_exercise.db')
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
+@app.route('/', methods=['GET'])
+def index(): 
+    return render_template('index.html')
+
+@app.route('/results', methods=['POST'])
+def results():
     movies = []
     if request.method == 'POST':
         search_ = request.form.get('content', ' ').strip()
@@ -37,7 +41,7 @@ def index():
         movies = df.to_dict(orient='records')
         print(movies)
     
-    return render_template('index.html', movies=movies)
+    return render_template('results.html', movies=movies)
 
 if __name__ == '__main__':
     app.run(debug=True)
