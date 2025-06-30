@@ -2,7 +2,6 @@
 
 {% block head %}
     <title>IMDB</title>
-    <!-- Bootstrap CSS (if not already in base.html) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 {% endblock %}
 
@@ -14,12 +13,12 @@
 
     <!-- Centered Form -->
     <form action="/results" method="POST" class="d-flex justify-content-center mb-4">
-        <input type="text" name="content" placeholder="Search for a movie, genre, country or director" class="form-control w-50 me-2">
+        <input type="text" name="content" placeholder="Search for a movie, genre, country or director" class="form-control w-50 me-2 mr-2">
         <input class="btn btn-dark" type="submit" value="Submit">
     </form>
 
     {% if movies %}
-        <h2 class="text-center mb-4">Results:</h2>
+        <!-- <h2 class="text-center mb-4">Results:</h2> -->
 
         <div class="table-responsive">
             <table class="table table-bordered">
