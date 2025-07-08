@@ -1,6 +1,6 @@
 #  IMDb Movie Search App
 
-A simple web application built with **Flask**, **HTML**, and **CSS** that lets users search for movies using the IMDb database via the [OMDb API](http://www.omdbapi.com/).
+A simple web application built with **Flask**, **HTML**, and **CSS** that lets users search for movies using the IMDb database.
 
 ---
 
